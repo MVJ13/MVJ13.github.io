@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mark — IT Support &amp; Help Desk Portfolio</title>
+<meta name="description" content="Portfolio of Mark, a BSIT graduate seeking Help Desk, IT Support, and Technical Support roles.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ---------- Tokens ---------- */
+:root {
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --border: #e2e5ea;
+  --text-primary: #1b2430;
+  --text-secondary: #5b6472;
+  --accent: #2f9e44;      /* resolved / status-online green */
+  --accent-info: #3b6ea5; /* links, tags */
+  --accent-warn: #c97a2b; /* used sparingly */
+  --radius: 8px;
+  --shadow: 0 1px 2px rgba(27, 36, 48, 0.06), 0 1px 8px rgba(27, 36, 48, 0.04);
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+  --max-width: 880px;
+}
+
+/* ---------- Reset ---------- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { line-height: 1.2; margin: 0 0 12px; }
+p { margin: 0 0 16px; color: var(--text-secondary); }
+ul { list-style: none; margin: 0; padding: 0; }
+img { max-width: 100%; display: block; }
+a { color: var(--accent-info); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--accent-info);
+  outline-offset: 2px;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--accent-info);
+  letter-spacing: 0.02em;
+  margin: 0 0 8px;
+}
+
+/* ---------- Header ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.status-bar {
+  background: var(--text-primary);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 6px 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: 0.03em;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 rgba(47, 158, 68, 0.6);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(47, 158, 68, 0.5); }
+  70%  { box-shadow: 0 0 0 6px rgba(47, 158, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(47, 158, 68, 0); }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+.logo {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+}
+.logo:hover { text-decoration: none; }
+.logo-accent { color: var(--accent-info); }
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+}
+
+.nav-menu {
+  display: flex;
+  gap: 24px;
+}
+.nav-menu a {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+.nav-menu a:hover { color: var(--text-primary); }
+
+/* ---------- Hero ---------- */
+.hero {
+  padding-top: 72px;
+  padding-bottom: 56px;
+}
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+}
+.hero-lead {
+  font-size: 1.1rem;
+  max-width: 52ch;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.btn {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 0.92rem;
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  display: inline-block;
+}
+.btn:hover { text-decoration: none; }
+.btn-primary {
+  background: var(--text-primary);
+  color: #fff;
+}
+.btn-primary:hover { background: #2b3646; }
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+.btn-secondary:hover { border-color: var(--text-secondary); }
+.btn-ghost {
+  color: var(--accent-info);
+  padding: 10px 4px;
+}
+
+/* ---------- Sections ---------- */
+.section {
+  padding-top: 48px;
+  padding-bottom: 48px;
+  border-top: 1px solid var(--border);
+}
+.section h2 { font-size: 1.5rem; }
+
+/* ---------- Certifications ---------- */
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.badge {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 8px 14px;
+  color: var(--text-primary);
+}
+
+/* ---------- Work log ---------- */
+.log-entry {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  box-shadow: var(--shadow);
+}
+.log-meta {
+  display: flex;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.log-tag {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 1px 8px;
+}
+.log-entry h3 { margin-bottom: 2px; }
+.log-org {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+/* ---------- Tickets (projects) ---------- */
+.ticket-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+.ticket {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  box-shadow: var(--shadow);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.ticket:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 14px rgba(27, 36, 48, 0.08);
+}
+.ticket-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.ticket-id {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.ticket-status {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  background: rgba(47, 158, 68, 0.1);
+  border-radius: 4px;
+  padding: 2px 8px;
+}
+.ticket h3 { font-size: 1.1rem; }
+.ticket-desc { font-size: 0.95rem; }
+.ticket-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+.ticket-stack li {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 8px;
+  color: var(--text-secondary);
+}
+.ticket-link { font-weight: 600; font-size: 0.9rem; }
+
+/* ---------- Skills (diagnostics) ---------- */
+.diag-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+.diag-group h3 {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+.diag-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  padding: 4px 0;
+}
+.diag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+/* ---------- Contact ---------- */
+.contact-section p { max-width: 50ch; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 0;
+}
+.site-footer p {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ---------- Scroll reveal ---------- */
+.section, .hero {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.section.is-visible, .hero.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .status-dot { animation: none; }
+  .section, .hero { opacity: 1; transform: none; transition: none; }
+  .ticket { transition: none; }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 700px) {
+  .nav-toggle { display: flex; }
+  .nav-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    gap: 0;
+    padding: 8px 24px 16px;
+  }
+  .nav-menu.is-open { display: flex; }
+  .nav-menu a {
+    display: block;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-menu li:last-child a { border-bottom: none; }
+}
+
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="status-bar">
+    <span class="status-dot" aria-hidden="true"></span>
+    <span>STATUS: Open to work</span>
+  </div>
+  <nav class="nav container" aria-label="Primary">
+    <a class="logo" href="#top">mark<span class="logo-accent">.dev</span></a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul id="nav-menu" class="nav-menu">
+      <li><a href="#about">About</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#experience">Work Log</a></li>
+      <li><a href="#projects">Tickets</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+  <section id="top" class="hero container">
+    <p class="eyebrow">// it support · help desk · technical support</p>
+    <h1>Hi, I'm Mark.</h1>
+    <p class="hero-lead">A fresh BSIT graduate who likes finding out why something's broken, and fixing it before the next ticket comes in.</p>
+    <div class="hero-actions">
+      <!-- TODO: replace with your real email -->
+      <a class="btn btn-primary" href="mailto:your.email@example.com">Email Me</a>
+      <!-- TODO: link to your actual resume PDF, e.g. hosted in this same repo -->
+      <a class="btn btn-secondary" href="#" target="_blank" rel="noopener">Resume</a>
+      <!-- TODO: replace with your GitHub profile URL -->
+      <a class="btn btn-ghost" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+  <section id="about" class="section container">
+    <p class="eyebrow">// about</p>
+    <h2>About</h2>
+    <p>I graduated with a BSIT degree from Columban College, Inc. in Olongapo City, and I'm looking to start my career in Help Desk, IT Support, Service Desk, or Technical Support. During my internship at the Olongapo City Hall MIS Office, I spent six months on hands-on technical support. I hold certifications in networking, Linux, and programming fundamentals. I like systems that work quietly in the background, and I like being the person who keeps them that way.</p>
+  </section>
+
+  <section id="certifications" class="section container">
+    <p class="eyebrow">// certifications</p>
+    <h2>Certifications</h2>
+    <div class="badge-row">
+      <span class="badge">CCNA</span>
+      <span class="badge">NDG Linux Essentials</span>
+      <span class="badge">Programming Essentials in C/C++/Python</span>
+    </div>
+  </section>
+
+  <section id="experience" class="section container">
+    <p class="eyebrow">// work-log</p>
+    <h2>Work Log</h2>
+    <div class="log-entry">
+      <div class="log-meta">
+        <span class="log-date">May 2025 – Oct 2025</span>
+        <span class="log-tag">On-site</span>
+      </div>
+      <h3>IT Technical Support Intern</h3>
+      <p class="log-org">Olongapo City Hall — MIS Office</p>
+      <p>Provided hands-on technical support across a real municipal IT environment — troubleshooting hardware, assisting end users, and getting first-hand exposure to how a support desk runs day to day.</p>
+    </div>
+  </section>
+
+  <section id="projects" class="section container">
+    <p class="eyebrow">// resolved-tickets</p>
+    <h2>Projects</h2>
+    <div class="ticket-grid">
+
+      <article class="ticket">
+        <div class="ticket-head">
+          <span class="ticket-id">#001</span>
+          <span class="ticket-status">Resolved</span>
+        </div>
+        <h3>POS System — Samgy Hann 199</h3>
+        <p class="ticket-desc">A web-based point-of-sale system built for a Korean BBQ restaurant as my capstone project. Handled order flow end-to-end and was load-tested with JMeter for real-world performance.</p>
+        <ul class="ticket-stack">
+          <li>Laravel 12</li>
+          <li>Livewire 3</li>
+          <li>PHP 8.2</li>
+          <li>Alpine.js</li>
+          <li>Tailwind CSS</li>
+          <li>MySQL</li>
+        </ul>
+        <!-- TODO: link to the project's GitHub repo -->
+        <a class="ticket-link" href="#" target="_blank" rel="noopener">View on GitHub →</a>
+      </article>
+
+      <article class="ticket">
+        <div class="ticket-head">
+          <span class="ticket-id">#002</span>
+          <span class="ticket-status">Resolved</span>
+        </div>
+        <h3>Trails</h3>
+        <p class="ticket-desc">A desktop time-management app built with a 4-person team using Agile/Kanban. Designed to help track tasks and time without getting in the way.</p>
+        <ul class="ticket-stack">
+          <li>Python</li>
+          <li>Tkinter</li>
+          <li>TTKBootstrap</li>
+        </ul>
+        <!-- TODO: link to the project's GitHub repo -->
+        <a class="ticket-link" href="#" target="_blank" rel="noopener">View on GitHub →</a>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="skills" class="section container">
+    <p class="eyebrow">// system-check</p>
+    <h2>Skills</h2>
+    <div class="diag-panel">
+      <div class="diag-group">
+        <h3>Support &amp; Troubleshooting</h3>
+        <ul class="diag-list">
+          <li><span class="diag-dot"></span>Hardware diagnostics</li>
+          <li><span class="diag-dot"></span>End-user support</li>
+          <li><span class="diag-dot"></span>Ticketing workflows</li>
+        </ul>
+      </div>
+      <div class="diag-group">
+        <h3>Networking &amp; Systems</h3>
+        <ul class="diag-list">
+          <li><span class="diag-dot"></span>Routing &amp; switching (CCNA)</li>
+          <li><span class="diag-dot"></span>Linux fundamentals</li>
+        </ul>
+      </div>
+      <div class="diag-group">
+        <h3>Programming</h3>
+        <ul class="diag-list">
+          <li><span class="diag-dot"></span>Python</li>
+          <li><span class="diag-dot"></span>C / C++</li>
+          <li><span class="diag-dot"></span>PHP / Laravel</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact-section container">
+    <p class="eyebrow">// contact</p>
+    <h2>Open a ticket</h2>
+    <p>Have an opening on your team, or just want to say hi? Send a message — I reply fast.</p>
+    <div class="hero-actions">
+      <!-- TODO: replace with your real email -->
+      <a class="btn btn-primary" href="mailto:your.email@example.com">Email Me</a>
+      <!-- TODO: replace with your LinkedIn profile URL -->
+      <a class="btn btn-secondary" href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LinkedIn</a>
+      <!-- TODO: replace with your GitHub profile URL -->
+      <a class="btn btn-ghost" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p class="container">© <span id="year"></span> Mark. Built with HTML, CSS &amp; JS.</p>
+</footer>
+
+<script>
+// Mobile nav toggle
+const navToggle = document.querySelector('.nav-toggle');
+const navMenu = document.querySelector('.nav-menu');
+
+if (navToggle && navMenu) {
+  navToggle.addEventListener('click', () => {
+    const isOpen = navMenu.classList.toggle('is-open');
+    navToggle.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Close menu after clicking a link (mobile)
+  navMenu.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('is-open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+}
+
+// Scroll-reveal for sections
+const revealTargets = document.querySelectorAll('.section, .hero');
+
+if ('IntersectionObserver' in window) {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  revealTargets.forEach((target) => observer.observe(target));
+} else {
+  // Fallback: just show everything
+  revealTargets.forEach((target) => target.classList.add('is-visible'));
+}
+
+// Footer year
+const yearEl = document.getElementById('year');
+if (yearEl) {
+  yearEl.textContent = new Date().getFullYear();
+}
+
+</script>
+</body>
+</html>
