@@ -8,68 +8,95 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header class="site-header">
-  <div class="status-bar">
-    <span class="status-dot" aria-hidden="true"></span>
-    <span>STATUS: Open to work</span>
-  </div>
   <nav class="nav container" aria-label="Primary">
-    <a class="logo" href="#top">mark<span class="logo-accent">.dev</span></a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+    <a class="logo" href="#top">mark<span class="logo-accent">.</span></a>
     <ul id="nav-menu" class="nav-menu">
       <li><a href="#about">About</a></li>
       <li><a href="#certifications">Certifications</a></li>
       <li><a href="#experience">Work Log</a></li>
-      <li><a href="#projects">Tickets</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <div class="nav-right">
+      <!-- TODO: link to your actual resume PDF, e.g. hosted in this same repo -->
+      <a class="pill pill-cta" href="#" target="_blank" rel="noopener">Resume</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 </header>
 
 <main>
 
   <section id="top" class="hero container">
-    <p class="eyebrow">// it support · help desk · technical support</p>
-    <h1>Hi, I'm Mark.</h1>
-    <p class="hero-lead">A fresh BSIT graduate who likes finding out why something's broken, and fixing it before the next ticket comes in.</p>
-    <div class="hero-actions">
-      <!-- TODO: replace with your real email -->
-      <a class="btn btn-primary" href="mailto:your.email@example.com">Email Me</a>
-      <!-- TODO: link to your actual resume PDF, e.g. hosted in this same repo -->
-      <a class="btn btn-secondary" href="#" target="_blank" rel="noopener">Resume</a>
-      <!-- TODO: replace with your GitHub profile URL -->
-      <a class="btn btn-ghost" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+    <div class="hero-card">
+      <div class="hero-card-top">
+        <span class="pill pill-status"><span class="status-dot" aria-hidden="true"></span>Available for work</span>
+        <p class="hero-intro">Hi, I'm Mark — a fresh BSIT grad ready to keep your systems running and your tickets closed.</p>
+      </div>
+
+      <!-- TODO: swap this illustration for a real photo of yourself when you have one -->
+      <img class="hero-photo" src="avatar-placeholder-dark.svg" alt="Placeholder illustration standing in for a future photo of Mark">
+
+      <div class="hero-card-bottom">
+        <h1 class="hero-name">MARK</h1>
+        <p class="hero-role">IT Support &amp; Help Desk Specialist</p>
+        <div class="hero-actions">
+          <!-- TODO: replace with your real email -->
+          <a class="btn btn-primary" href="mailto:your.email@example.com"><span class="btn-icon">→</span>Email me</a>
+          <!-- TODO: replace with your GitHub profile URL -->
+          <a class="btn btn-outline" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
     </div>
   </section>
 
+  <div id="certifications" class="cert-strip container">
+    <span>CCNA</span>
+    <span class="dot-sep" aria-hidden="true">•</span>
+    <span>NDG Linux Essentials</span>
+    <span class="dot-sep" aria-hidden="true">•</span>
+    <span>Programming Essentials — C/C++/Python</span>
+  </div>
+
   <section id="about" class="section container">
-    <p class="eyebrow">// about</p>
-    <h2>About</h2>
-    <p>I graduated with a BSIT degree from Columban College, Inc. in Olongapo City, and I'm looking to start my career in Help Desk, IT Support, Service Desk, or Technical Support. During my internship at the Olongapo City Hall MIS Office, I spent six months on hands-on technical support. I hold certifications in networking, Linux, and programming fundamentals. I like systems that work quietly in the background, and I like being the person who keeps them that way.</p>
+    <div class="about-grid">
+      <div class="about-copy">
+        <span class="pill pill-outline">// about</span>
+        <h2 class="about-heading">Fixing Things Quietly, So Everyone Else Can Keep Working</h2>
+        <p>I graduated with a BSIT degree from Columban College, Inc. in Olongapo City, and I'm looking to start my career in Help Desk, IT Support, Service Desk, or Technical Support. I like systems that work quietly in the background, and I like being the person who keeps them that way.</p>
+        <a class="btn btn-primary" href="#projects"><span class="btn-icon">→</span>See my work</a>
+      </div>
+      <div class="stat-fan" aria-hidden="true">
+        <div class="stat-card stat-card--a"><strong>6 mo</strong><span>Hands-on IT support</span></div>
+        <div class="stat-card stat-card--b"><strong>2</strong><span>Shipped projects</span></div>
+        <div class="stat-card stat-card--c"><strong>3</strong><span>Certifications earned</span></div>
+      </div>
+    </div>
   </section>
 
-  <section id="certifications" class="section container">
-    <p class="eyebrow">// certifications</p>
-    <h2>Certifications</h2>
-    <div class="badge-row">
-      <span class="badge">CCNA</span>
-      <span class="badge">NDG Linux Essentials</span>
-      <span class="badge">Programming Essentials in C/C++/Python</span>
+  <section class="section container">
+    <div class="cta-banner">
+      <div>
+        <h2>Let's Solve Something Together</h2>
+        <p>Have an opening on your support team, or just want to say hi?</p>
+      </div>
+      <a class="btn btn-primary" href="#contact"><span class="btn-icon">→</span>Contact me</a>
     </div>
   </section>
 
   <section id="experience" class="section container">
-    <p class="eyebrow">// work-log</p>
-    <h2>Work Log</h2>
+    <span class="pill pill-outline">// work-log</span>
+    <h2 class="section-heading">Work Log</h2>
     <div class="log-entry">
       <div class="log-meta">
         <span class="log-date">May 2025 – Oct 2025</span>
@@ -81,90 +108,97 @@
     </div>
   </section>
 
-  <section id="projects" class="section container">
-    <p class="eyebrow">// resolved-tickets</p>
-    <h2>Projects</h2>
-    <div class="ticket-grid">
-
-      <article class="ticket">
-        <div class="ticket-head">
-          <span class="ticket-id">#001</span>
-          <span class="ticket-status">Resolved</span>
-        </div>
-        <h3>POS System — Samgy Hann 199</h3>
-        <p class="ticket-desc">A web-based point-of-sale system built for a Korean BBQ restaurant as my capstone project. Handled order flow end-to-end and was load-tested with JMeter for real-world performance.</p>
-        <ul class="ticket-stack">
-          <li>Laravel 12</li>
-          <li>Livewire 3</li>
-          <li>PHP 8.2</li>
-          <li>Alpine.js</li>
-          <li>Tailwind CSS</li>
-          <li>MySQL</li>
+  <section id="skills" class="section container">
+    <span class="pill pill-outline">// skills</span>
+    <h2 class="section-heading">What I Bring</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Networking &amp; Systems</h3>
+        <ul>
+          <li>Routing &amp; switching (CCNA)</li>
+          <li>Linux fundamentals</li>
         </ul>
-        <!-- TODO: link to the project's GitHub repo -->
-        <a class="ticket-link" href="#" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
-
-      <article class="ticket">
-        <div class="ticket-head">
-          <span class="ticket-id">#002</span>
-          <span class="ticket-status">Resolved</span>
-        </div>
-        <h3>Trails</h3>
-        <p class="ticket-desc">A desktop time-management app built with a 4-person team using Agile/Kanban. Designed to help track tasks and time without getting in the way.</p>
-        <ul class="ticket-stack">
+      </div>
+      <div class="skill-card skill-card--highlight">
+        <span class="skill-tag">Core strength</span>
+        <h3>Support &amp; Troubleshooting</h3>
+        <ul>
+          <li>Hardware diagnostics</li>
+          <li>End-user support</li>
+          <li>Ticketing workflows</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Programming</h3>
+        <ul>
           <li>Python</li>
-          <li>Tkinter</li>
-          <li>TTKBootstrap</li>
+          <li>C / C++</li>
+          <li>PHP / Laravel</li>
         </ul>
-        <!-- TODO: link to the project's GitHub repo -->
-        <a class="ticket-link" href="#" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
-
+      </div>
     </div>
   </section>
 
-  <section id="skills" class="section container">
-    <p class="eyebrow">// system-check</p>
-    <h2>Skills</h2>
-    <div class="diag-panel">
-      <div class="diag-group">
-        <h3>Support &amp; Troubleshooting</h3>
-        <ul class="diag-list">
-          <li><span class="diag-dot"></span>Hardware diagnostics</li>
-          <li><span class="diag-dot"></span>End-user support</li>
-          <li><span class="diag-dot"></span>Ticketing workflows</li>
-        </ul>
-      </div>
-      <div class="diag-group">
-        <h3>Networking &amp; Systems</h3>
-        <ul class="diag-list">
-          <li><span class="diag-dot"></span>Routing &amp; switching (CCNA)</li>
-          <li><span class="diag-dot"></span>Linux fundamentals</li>
-        </ul>
-      </div>
-      <div class="diag-group">
-        <h3>Programming</h3>
-        <ul class="diag-list">
-          <li><span class="diag-dot"></span>Python</li>
-          <li><span class="diag-dot"></span>C / C++</li>
-          <li><span class="diag-dot"></span>PHP / Laravel</li>
-        </ul>
-      </div>
+  <section id="projects" class="section container">
+    <span class="pill pill-outline">// projects</span>
+    <h2 class="section-heading">Recent Work</h2>
+    <div class="project-grid">
+
+      <article class="project-card">
+        <div class="project-thumb project-thumb--a">POS</div>
+        <div class="project-body">
+          <div class="project-head">
+            <span class="project-id">#001</span>
+            <span class="project-status">Resolved</span>
+          </div>
+          <h3>POS System — Samgy Hann 199</h3>
+          <p>A web-based point-of-sale system built for a Korean BBQ restaurant as my capstone project. Handled order flow end-to-end and was load-tested with JMeter for real-world performance.</p>
+          <ul class="stack-list">
+            <li>Laravel 12</li>
+            <li>Livewire 3</li>
+            <li>PHP 8.2</li>
+            <li>Alpine.js</li>
+            <li>Tailwind CSS</li>
+            <li>MySQL</li>
+          </ul>
+          <!-- TODO: link to the project's GitHub repo -->
+          <a class="project-link" href="#" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <div class="project-thumb project-thumb--b">TR</div>
+        <div class="project-body">
+          <div class="project-head">
+            <span class="project-id">#002</span>
+            <span class="project-status">Resolved</span>
+          </div>
+          <h3>Trails</h3>
+          <p>A desktop time-management app built with a 4-person team using Agile/Kanban. Designed to help track tasks and time without getting in the way.</p>
+          <ul class="stack-list">
+            <li>Python</li>
+            <li>Tkinter</li>
+            <li>TTKBootstrap</li>
+          </ul>
+          <!-- TODO: link to the project's GitHub repo -->
+          <a class="project-link" href="#" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </article>
+
     </div>
   </section>
 
   <section id="contact" class="section contact-section container">
-    <p class="eyebrow">// contact</p>
-    <h2>Open a ticket</h2>
+    <span class="pill pill-outline">// contact</span>
+    <h2 class="section-heading">Open a Ticket</h2>
     <p>Have an opening on your team, or just want to say hi? Send a message — I reply fast.</p>
     <div class="hero-actions">
       <!-- TODO: replace with your real email -->
-      <a class="btn btn-primary" href="mailto:your.email@example.com">Email Me</a>
+      <a class="btn btn-primary" href="mailto:your.email@example.com"><span class="btn-icon">→</span>Email me</a>
       <!-- TODO: replace with your LinkedIn profile URL -->
-      <a class="btn btn-secondary" href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-outline" href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LinkedIn</a>
       <!-- TODO: replace with your GitHub profile URL -->
-      <a class="btn btn-ghost" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-outline" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
     </div>
   </section>
 

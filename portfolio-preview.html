@@ -8,24 +8,29 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
 
 <style>
 /* ---------- Tokens ---------- */
 :root {
-  --bg: #f7f8fa;
-  --surface: #ffffff;
-  --border: #e2e5ea;
-  --text-primary: #1b2430;
-  --text-secondary: #5b6472;
-  --accent: #2f9e44;      /* resolved / status-online green */
-  --accent-info: #3b6ea5; /* links, tags */
-  --accent-warn: #c97a2b; /* used sparingly */
-  --radius: 8px;
-  --shadow: 0 1px 2px rgba(27, 36, 48, 0.06), 0 1px 8px rgba(27, 36, 48, 0.04);
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
-  --max-width: 880px;
+  --bg: #0e0e10;
+  --bg-elevated: #17171a;
+  --card: #1c1c20;
+  --border: rgba(255, 255, 255, 0.08);
+  --text-primary: #f5f5f6;
+  --text-secondary: #9a9aa2;
+  --text-muted: #6b6b74;
+  --accent: #ff6b3d;
+  --accent-strong: #ff5722;
+  --accent-soft: rgba(255, 107, 61, 0.12);
+  --available: #2f9e44;
+  --radius-lg: 28px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+  --font-display: 'Sora', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --max-width: 1080px;
 }
 
 /* ---------- Reset ---------- */
@@ -33,20 +38,20 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
   background: var(--bg);
   color: var(--text-primary);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
-h1, h2, h3 { line-height: 1.2; margin: 0 0 12px; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.15; margin: 0 0 12px; }
 p { margin: 0 0 16px; color: var(--text-secondary); }
 ul { list-style: none; margin: 0; padding: 0; }
 img { max-width: 100%; display: block; }
-a { color: var(--accent-info); text-decoration: none; }
+a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; }
 a:focus-visible, button:focus-visible {
-  outline: 2px solid var(--accent-info);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
@@ -56,12 +61,47 @@ a:focus-visible, button:focus-visible {
   padding: 0 24px;
 }
 
-.eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--accent-info);
-  letter-spacing: 0.02em;
-  margin: 0 0 8px;
+/* ---------- Pills ---------- */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.pill-status {
+  background: rgba(47, 158, 68, 0.14);
+  color: #6fd88a;
+}
+.pill-cta {
+  background: var(--accent);
+  color: #17171a;
+  font-weight: 700;
+}
+.pill-cta:hover { background: var(--accent-strong); text-decoration: none; }
+.pill-outline {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  margin-bottom: 16px;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--available);
+  box-shadow: 0 0 0 0 rgba(47, 158, 68, 0.6);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(47, 158, 68, 0.5); }
+  70%  { box-shadow: 0 0 0 6px rgba(47, 158, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(47, 158, 68, 0); }
 }
 
 /* ---------- Header ---------- */
@@ -69,53 +109,35 @@ a:focus-visible, button:focus-visible {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: var(--surface);
+  background: rgba(14, 14, 16, 0.85);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
-
-.status-bar {
-  background: var(--text-primary);
-  color: #fff;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  padding: 6px 24px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  letter-spacing: 0.03em;
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--accent);
-  box-shadow: 0 0 0 0 rgba(47, 158, 68, 0.6);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%   { box-shadow: 0 0 0 0 rgba(47, 158, 68, 0.5); }
-  70%  { box-shadow: 0 0 0 6px rgba(47, 158, 68, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(47, 158, 68, 0); }
-}
-
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 14px;
-  padding-bottom: 14px;
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
-
 .logo {
-  font-family: var(--font-mono);
-  font-weight: 600;
-  font-size: 1.05rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
   color: var(--text-primary);
 }
 .logo:hover { text-decoration: none; }
-.logo-accent { color: var(--accent-info); }
+.logo-accent { color: var(--accent); }
+
+.nav-menu { display: flex; gap: 28px; }
+.nav-menu a {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  font-weight: 500;
+}
+.nav-menu a:hover { color: var(--text-primary); text-decoration: none; }
+
+.nav-right { display: flex; align-items: center; gap: 16px; }
 
 .nav-toggle {
   display: none;
@@ -129,224 +151,301 @@ a:focus-visible, button:focus-visible {
   cursor: pointer;
   padding: 0;
 }
-.nav-toggle span {
-  display: block;
-  height: 2px;
-  background: var(--text-primary);
-  border-radius: 2px;
-}
-
-.nav-menu {
-  display: flex;
-  gap: 24px;
-}
-.nav-menu a {
-  color: var(--text-secondary);
-  font-size: 0.92rem;
-  font-weight: 500;
-}
-.nav-menu a:hover { color: var(--text-primary); }
+.nav-toggle span { display: block; height: 2px; background: var(--text-primary); border-radius: 2px; }
 
 /* ---------- Hero ---------- */
-.hero {
-  padding-top: 72px;
-  padding-bottom: 56px;
-}
-.hero h1 {
-  font-size: clamp(2rem, 5vw, 2.75rem);
-}
-.hero-lead {
-  font-size: 1.1rem;
-  max-width: 52ch;
-}
-.hero-actions {
+.hero { padding-top: 40px; padding-bottom: 32px; }
+.hero-card {
+  position: relative;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 560px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  flex-direction: column;
+  box-shadow: var(--shadow);
 }
+.hero-card-top {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 32px 0;
+}
+.hero-intro {
+  max-width: 30ch;
+  text-align: right;
+  font-size: 0.95rem;
+  margin: 0;
+  color: var(--text-secondary);
+}
+.hero-photo {
+  position: absolute;
+  right: 6%;
+  top: 8%;
+  width: 44%;
+  max-width: 320px;
+  border-radius: var(--radius-md);
+  z-index: 1;
+}
+.hero-card-bottom {
+  position: relative;
+  z-index: 2;
+  margin-top: auto;
+  padding: 0 32px 32px;
+}
+.hero-name {
+  font-size: clamp(3.5rem, 12vw, 7rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--text-primary);
+}
+.hero-role {
+  font-size: 1.1rem;
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 
 .btn {
-  font-family: var(--font-sans);
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-weight: 700;
   font-size: 0.92rem;
-  padding: 10px 18px;
-  border-radius: var(--radius);
-  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 .btn:hover { text-decoration: none; }
-.btn-primary {
-  background: var(--text-primary);
-  color: #fff;
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.15);
+  font-size: 0.8rem;
 }
-.btn-primary:hover { background: #2b3646; }
-.btn-secondary {
-  background: var(--surface);
+.btn-primary { background: var(--accent); color: #17171a; }
+.btn-primary:hover { background: var(--accent-strong); }
+.btn-primary .btn-icon { background: rgba(23, 23, 26, 0.18); }
+.btn-outline {
+  background: transparent;
   color: var(--text-primary);
   border: 1px solid var(--border);
 }
-.btn-secondary:hover { border-color: var(--text-secondary); }
-.btn-ghost {
-  color: var(--accent-info);
-  padding: 10px 4px;
+.btn-outline:hover { border-color: var(--text-secondary); }
+
+/* ---------- Certification strip ---------- */
+.cert-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding-top: 28px;
+  padding-bottom: 28px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
+.dot-sep { color: var(--border); }
 
 /* ---------- Sections ---------- */
 .section {
-  padding-top: 48px;
-  padding-bottom: 48px;
+  padding-top: 56px;
+  padding-bottom: 56px;
   border-top: 1px solid var(--border);
 }
-.section h2 { font-size: 1.5rem; }
+.section-heading { font-size: 1.6rem; }
 
-/* ---------- Certifications ---------- */
-.badge-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+/* ---------- About ---------- */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 48px;
+  align-items: center;
 }
-.badge {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  background: var(--surface);
+.about-heading {
+  font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+  max-width: 16ch;
+}
+.about-copy p { max-width: 48ch; }
+
+.stat-fan {
+  position: relative;
+  height: 220px;
+}
+.stat-card {
+  position: absolute;
+  width: 190px;
+  background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 8px 14px;
-  color: var(--text-primary);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+  box-shadow: var(--shadow);
 }
+.stat-card strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  color: var(--accent);
+}
+.stat-card span { font-size: 0.85rem; color: var(--text-secondary); }
+.stat-card--a { top: 0; left: 10%; transform: rotate(-6deg); z-index: 3; }
+.stat-card--b { top: 40px; left: 38%; transform: rotate(4deg); z-index: 2; }
+.stat-card--c { top: 90px; left: 8%; transform: rotate(2deg); z-index: 1; }
+
+/* ---------- CTA banner ---------- */
+.cta-banner {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.cta-banner h2 { font-size: 1.6rem; margin-bottom: 6px; }
+.cta-banner p { margin: 0; }
 
 /* ---------- Work log ---------- */
 .log-entry {
-  background: var(--surface);
+  background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px 24px;
-  box-shadow: var(--shadow);
+  border-radius: var(--radius-md);
+  padding: 24px 28px;
 }
 .log-meta {
   display: flex;
   gap: 12px;
-  font-family: var(--font-mono);
   font-size: 0.78rem;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   margin-bottom: 8px;
 }
 .log-tag {
-  background: var(--bg);
+  background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 1px 8px;
 }
 .log-entry h3 { margin-bottom: 2px; }
-.log-org {
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: 10px;
-}
+.log-org { font-weight: 600; color: var(--text-primary); margin-bottom: 10px; }
 
-/* ---------- Tickets (projects) ---------- */
-.ticket-grid {
+/* ---------- Skills ---------- */
+.skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
-.ticket {
-  background: var(--surface);
+.skill-card {
+  background: var(--card);
   border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px 24px;
-  box-shadow: var(--shadow);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  position: relative;
+}
+.skill-card--highlight {
+  background: linear-gradient(180deg, rgba(255, 107, 61, 0.1), var(--card) 40%);
+  border-color: var(--accent);
+}
+.skill-tag {
+  display: inline-block;
+  background: var(--accent);
+  color: #17171a;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+.skill-card h3 { font-size: 1.05rem; margin-bottom: 14px; }
+.skill-card li {
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+.skill-card li:first-of-type { border-top: none; }
+
+/* ---------- Projects ---------- */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
-.ticket:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(27, 36, 48, 0.08);
+.project-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+.project-thumb {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.8rem;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0.05em;
 }
-.ticket-head {
+.project-thumb--a { background: linear-gradient(135deg, #ff6b3d, #c73f1c); }
+.project-thumb--b { background: linear-gradient(135deg, #3b6ea5, #1c2b3f); }
+.project-body { padding: 22px 24px; }
+.project-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
 }
-.ticket-id {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-}
-.ticket-status {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
+.project-id { font-size: 0.8rem; color: var(--text-muted); }
+.project-status {
+  font-size: 0.7rem;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--accent);
-  background: rgba(47, 158, 68, 0.1);
+  color: var(--available);
+  background: rgba(47, 158, 68, 0.12);
   border-radius: 4px;
   padding: 2px 8px;
 }
-.ticket h3 { font-size: 1.1rem; }
-.ticket-desc { font-size: 0.95rem; }
-.ticket-stack {
+.project-card h3 { font-size: 1.1rem; }
+.stack-list {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
-.ticket-stack li {
-  font-family: var(--font-mono);
+.stack-list li {
   font-size: 0.72rem;
-  background: var(--bg);
+  background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 2px 8px;
   color: var(--text-secondary);
 }
-.ticket-link { font-weight: 600; font-size: 0.9rem; }
-
-/* ---------- Skills (diagnostics) ---------- */
-.diag-panel {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 24px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px;
-  box-shadow: var(--shadow);
-}
-.diag-group h3 {
-  font-size: 0.95rem;
-  color: var(--text-primary);
-  margin-bottom: 12px;
-}
-.diag-list li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.92rem;
-  color: var(--text-secondary);
-  padding: 4px 0;
-}
-.diag-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent);
-  flex-shrink: 0;
-}
+.project-link { font-weight: 700; font-size: 0.9rem; }
 
 /* ---------- Contact ---------- */
 .contact-section p { max-width: 50ch; }
 
 /* ---------- Footer ---------- */
-.site-footer {
-  border-top: 1px solid var(--border);
-  padding: 24px 0;
-}
-.site-footer p {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  margin: 0;
-}
+.site-footer { border-top: 1px solid var(--border); padding: 28px 0; }
+.site-footer p { font-size: 0.82rem; color: var(--text-muted); margin: 0; }
 
 /* ---------- Scroll reveal ---------- */
 .section, .hero {
@@ -354,40 +453,47 @@ a:focus-visible, button:focus-visible {
   transform: translateY(12px);
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
-.section.is-visible, .hero.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.section.is-visible, .hero.is-visible { opacity: 1; transform: translateY(0); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .status-dot { animation: none; }
   .section, .hero { opacity: 1; transform: none; transition: none; }
-  .ticket { transition: none; }
+  .project-card { transition: none; }
 }
 
 /* ---------- Mobile ---------- */
+@media (max-width: 860px) {
+  .about-grid { grid-template-columns: 1fr; }
+  .stat-fan { height: 260px; margin-top: 12px; }
+}
+
 @media (max-width: 700px) {
-  .nav-toggle { display: flex; }
   .nav-menu {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
-    background: var(--surface);
+    background: var(--bg-elevated);
     border-bottom: 1px solid var(--border);
     flex-direction: column;
     gap: 0;
     padding: 8px 24px 16px;
   }
   .nav-menu.is-open { display: flex; }
-  .nav-menu a {
-    display: block;
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-  }
+  .nav-menu a { display: block; padding: 10px 0; border-bottom: 1px solid var(--border); }
   .nav-menu li:last-child a { border-bottom: none; }
+  .nav-toggle { display: flex; }
+
+  .hero-card { min-height: auto; padding-bottom: 200px; }
+  .hero-card-top { flex-direction: column; gap: 16px; }
+  .hero-intro { text-align: left; max-width: none; }
+  .hero-photo { position: static; width: 60%; margin: 16px auto 0; }
+  .hero-card-bottom { padding-top: 20px; }
+
+  .skills-grid { grid-template-columns: 1fr; }
+  .cta-banner { flex-direction: column; align-items: flex-start; }
 }
 
 </style>
@@ -395,61 +501,88 @@ a:focus-visible, button:focus-visible {
 <body>
 
 <header class="site-header">
-  <div class="status-bar">
-    <span class="status-dot" aria-hidden="true"></span>
-    <span>STATUS: Open to work</span>
-  </div>
   <nav class="nav container" aria-label="Primary">
-    <a class="logo" href="#top">mark<span class="logo-accent">.dev</span></a>
-    <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle menu">
-      <span></span><span></span><span></span>
-    </button>
+    <a class="logo" href="#top">mark<span class="logo-accent">.</span></a>
     <ul id="nav-menu" class="nav-menu">
       <li><a href="#about">About</a></li>
       <li><a href="#certifications">Certifications</a></li>
       <li><a href="#experience">Work Log</a></li>
-      <li><a href="#projects">Tickets</a></li>
       <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <div class="nav-right">
+      <!-- TODO: link to your actual resume PDF, e.g. hosted in this same repo -->
+      <a class="pill pill-cta" href="#" target="_blank" rel="noopener">Resume</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </nav>
 </header>
 
 <main>
 
   <section id="top" class="hero container">
-    <p class="eyebrow">// it support · help desk · technical support</p>
-    <h1>Hi, I'm Mark.</h1>
-    <p class="hero-lead">A fresh BSIT graduate who likes finding out why something's broken, and fixing it before the next ticket comes in.</p>
-    <div class="hero-actions">
-      <!-- TODO: replace with your real email -->
-      <a class="btn btn-primary" href="mailto:your.email@example.com">Email Me</a>
-      <!-- TODO: link to your actual resume PDF, e.g. hosted in this same repo -->
-      <a class="btn btn-secondary" href="#" target="_blank" rel="noopener">Resume</a>
-      <!-- TODO: replace with your GitHub profile URL -->
-      <a class="btn btn-ghost" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+    <div class="hero-card">
+      <div class="hero-card-top">
+        <span class="pill pill-status"><span class="status-dot" aria-hidden="true"></span>Available for work</span>
+        <p class="hero-intro">Hi, I'm Mark — a fresh BSIT grad ready to keep your systems running and your tickets closed.</p>
+      </div>
+
+      <!-- TODO: swap this illustration for a real photo of yourself when you have one -->
+      <img class="hero-photo" src="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDgwIDYwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiByb2xlPSJpbWciIGFyaWEtbGFiZWw9IlBsYWNlaG9sZGVyIGlsbHVzdHJhdGlvbiBvZiBNYXJrIj4KICA8ZGVmcz4KICAgIDxyYWRpYWxHcmFkaWVudCBpZD0iZ2xvdyIgY3g9IjUwJSIgY3k9IjM1JSIgcj0iNjAlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI0ZGNkIzRCIgc3RvcC1vcGFjaXR5PSIwLjM1Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI0ZGNkIzRCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgICA8L3JhZGlhbEdyYWRpZW50PgogICAgPGNsaXBQYXRoIGlkPSJmcmFtZSI+CiAgICAgIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI0ODAiIGhlaWdodD0iNjAwIiByeD0iMCIvPgogICAgPC9jbGlwUGF0aD4KICA8L2RlZnM+CgogIDxyZWN0IHdpZHRoPSI0ODAiIGhlaWdodD0iNjAwIiBmaWxsPSIjMTcxNzFBIi8+CiAgPGNpcmNsZSBjeD0iMjQwIiBjeT0iMjMwIiByPSIyNjAiIGZpbGw9InVybCgjZ2xvdykiLz4KCiAgPGcgY2xpcC1wYXRoPSJ1cmwoI2ZyYW1lKSI+CiAgICA8IS0tIFNob3VsZGVycyAvIHNoaXJ0IC0tPgogICAgPHBhdGggZD0iTTYwIDYwMCBDNjQgNDcwIDEzMCA0MDAgMjQwIDQwMCBDMzUwIDQwMCA0MTYgNDcwIDQyMCA2MDAgWiIgZmlsbD0iIzIwMjMyQSIvPgogICAgPHBhdGggZD0iTTEwMCA2MDAgQzEwNCA0ODAgMTUwIDQxNSAyNDAgNDEyIEMzMzAgNDE1IDM3NiA0ODAgMzgwIDYwMCBaIiBmaWxsPSIjRkY2QjNEIi8+CgogICAgPCEtLSBOZWNrIC0tPgogICAgPHJlY3QgeD0iMjA1IiB5PSIzMzAiIHdpZHRoPSI3MCIgaGVpZ2h0PSI5MCIgcng9IjE2IiBmaWxsPSIjRTdDNkE1Ii8+CgogICAgPCEtLSBIZWFkIC0tPgogICAgPGVsbGlwc2UgY3g9IjI0MCIgY3k9IjI0NSIgcng9IjEwOCIgcnk9IjExOCIgZmlsbD0iI0YxRDNBRSIvPgoKICAgIDwhLS0gSGFpciAtLT4KICAgIDxwYXRoIGQ9Ik0xMzIgMjI1IEMxMjQgMTMwIDE5MCA3OCAyNDAgNzggQzI5MCA3OCAzNTYgMTMwIDM0OCAyMjUgQzMzNiAxOTAgMzA0IDE3NCAzMDAgMTk4IEMyODQgMTYyIDI1MiAxNDYgMjQwIDE0NiBDMjI4IDE0NiAxOTYgMTYyIDE4MCAxOTggQzE3NiAxNzQgMTQ0IDE5MCAxMzIgMjI1IFoiIGZpbGw9IiMxMjE0MUEiLz4KCiAgICA8IS0tIEVhcnMgLS0+CiAgICA8ZWxsaXBzZSBjeD0iMTMyIiBjeT0iMjUwIiByeD0iMTQiIHJ5PSIyMiIgZmlsbD0iI0YxRDNBRSIvPgogICAgPGVsbGlwc2UgY3g9IjM0OCIgY3k9IjI1MCIgcng9IjE0IiByeT0iMjIiIGZpbGw9IiNGMUQzQUUiLz4KCiAgICA8IS0tIEdsYXNzZXMgLS0+CiAgICA8ZyBzdHJva2U9IiNGNUY1RjYiIHN0cm9rZS13aWR0aD0iNyIgZmlsbD0ibm9uZSI+CiAgICAgIDxyZWN0IHg9IjE3MiIgeT0iMjM4IiB3aWR0aD0iNjYiIGhlaWdodD0iNTAiIHJ4PSIxNCIvPgogICAgICA8cmVjdCB4PSIyNDIiIHk9IjIzOCIgd2lkdGg9IjY2IiBoZWlnaHQ9IjUwIiByeD0iMTQiLz4KICAgICAgPGxpbmUgeDE9IjIzOCIgeTE9IjI2MCIgeDI9IjI0MiIgeTI9IjI2MCIvPgogICAgICA8bGluZSB4MT0iMTcyIiB5MT0iMjUyIiB4Mj0iMTQwIiB5Mj0iMjM4Ii8+CiAgICAgIDxsaW5lIHgxPSIzMDgiIHkxPSIyNTIiIHgyPSIzNDAiIHkyPSIyMzgiLz4KICAgIDwvZz4KCiAgICA8IS0tIFNtaWxlIC0tPgogICAgPHBhdGggZD0iTTIwNSAzMjAgUTI0MCAzNDYgMjc1IDMyMCIgc3Ryb2tlPSIjMjAyMzJBIiBzdHJva2Utd2lkdGg9IjciIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDwvZz4KCiAgPCEtLSBTdGF0dXMgZG90LCBlY2hvaW5nIHRoZSBzaXRlJ3MgImF2YWlsYWJsZSIgYmFkZ2UgLS0+CiAgPGNpcmNsZSBjeD0iMzkyIiBjeT0iNDcwIiByPSIyMCIgZmlsbD0iIzJGOUU0NCIgc3Ryb2tlPSIjMTcxNzFBIiBzdHJva2Utd2lkdGg9IjYiLz4KPC9zdmc+Cg==" alt="Placeholder illustration standing in for a future photo of Mark">
+
+      <div class="hero-card-bottom">
+        <h1 class="hero-name">MARK</h1>
+        <p class="hero-role">IT Support &amp; Help Desk Specialist</p>
+        <div class="hero-actions">
+          <!-- TODO: replace with your real email -->
+          <a class="btn btn-primary" href="mailto:your.email@example.com"><span class="btn-icon">→</span>Email me</a>
+          <!-- TODO: replace with your GitHub profile URL -->
+          <a class="btn btn-outline" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
     </div>
   </section>
 
+  <div id="certifications" class="cert-strip container">
+    <span>CCNA</span>
+    <span class="dot-sep" aria-hidden="true">•</span>
+    <span>NDG Linux Essentials</span>
+    <span class="dot-sep" aria-hidden="true">•</span>
+    <span>Programming Essentials — C/C++/Python</span>
+  </div>
+
   <section id="about" class="section container">
-    <p class="eyebrow">// about</p>
-    <h2>About</h2>
-    <p>I graduated with a BSIT degree from Columban College, Inc. in Olongapo City, and I'm looking to start my career in Help Desk, IT Support, Service Desk, or Technical Support. During my internship at the Olongapo City Hall MIS Office, I spent six months on hands-on technical support. I hold certifications in networking, Linux, and programming fundamentals. I like systems that work quietly in the background, and I like being the person who keeps them that way.</p>
+    <div class="about-grid">
+      <div class="about-copy">
+        <span class="pill pill-outline">// about</span>
+        <h2 class="about-heading">Fixing Things Quietly, So Everyone Else Can Keep Working</h2>
+        <p>I graduated with a BSIT degree from Columban College, Inc. in Olongapo City, and I'm looking to start my career in Help Desk, IT Support, Service Desk, or Technical Support. I like systems that work quietly in the background, and I like being the person who keeps them that way.</p>
+        <a class="btn btn-primary" href="#projects"><span class="btn-icon">→</span>See my work</a>
+      </div>
+      <div class="stat-fan" aria-hidden="true">
+        <div class="stat-card stat-card--a"><strong>6 mo</strong><span>Hands-on IT support</span></div>
+        <div class="stat-card stat-card--b"><strong>2</strong><span>Shipped projects</span></div>
+        <div class="stat-card stat-card--c"><strong>3</strong><span>Certifications earned</span></div>
+      </div>
+    </div>
   </section>
 
-  <section id="certifications" class="section container">
-    <p class="eyebrow">// certifications</p>
-    <h2>Certifications</h2>
-    <div class="badge-row">
-      <span class="badge">CCNA</span>
-      <span class="badge">NDG Linux Essentials</span>
-      <span class="badge">Programming Essentials in C/C++/Python</span>
+  <section class="section container">
+    <div class="cta-banner">
+      <div>
+        <h2>Let's Solve Something Together</h2>
+        <p>Have an opening on your support team, or just want to say hi?</p>
+      </div>
+      <a class="btn btn-primary" href="#contact"><span class="btn-icon">→</span>Contact me</a>
     </div>
   </section>
 
   <section id="experience" class="section container">
-    <p class="eyebrow">// work-log</p>
-    <h2>Work Log</h2>
+    <span class="pill pill-outline">// work-log</span>
+    <h2 class="section-heading">Work Log</h2>
     <div class="log-entry">
       <div class="log-meta">
         <span class="log-date">May 2025 – Oct 2025</span>
@@ -461,90 +594,97 @@ a:focus-visible, button:focus-visible {
     </div>
   </section>
 
-  <section id="projects" class="section container">
-    <p class="eyebrow">// resolved-tickets</p>
-    <h2>Projects</h2>
-    <div class="ticket-grid">
-
-      <article class="ticket">
-        <div class="ticket-head">
-          <span class="ticket-id">#001</span>
-          <span class="ticket-status">Resolved</span>
-        </div>
-        <h3>POS System — Samgy Hann 199</h3>
-        <p class="ticket-desc">A web-based point-of-sale system built for a Korean BBQ restaurant as my capstone project. Handled order flow end-to-end and was load-tested with JMeter for real-world performance.</p>
-        <ul class="ticket-stack">
-          <li>Laravel 12</li>
-          <li>Livewire 3</li>
-          <li>PHP 8.2</li>
-          <li>Alpine.js</li>
-          <li>Tailwind CSS</li>
-          <li>MySQL</li>
+  <section id="skills" class="section container">
+    <span class="pill pill-outline">// skills</span>
+    <h2 class="section-heading">What I Bring</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Networking &amp; Systems</h3>
+        <ul>
+          <li>Routing &amp; switching (CCNA)</li>
+          <li>Linux fundamentals</li>
         </ul>
-        <!-- TODO: link to the project's GitHub repo -->
-        <a class="ticket-link" href="#" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
-
-      <article class="ticket">
-        <div class="ticket-head">
-          <span class="ticket-id">#002</span>
-          <span class="ticket-status">Resolved</span>
-        </div>
-        <h3>Trails</h3>
-        <p class="ticket-desc">A desktop time-management app built with a 4-person team using Agile/Kanban. Designed to help track tasks and time without getting in the way.</p>
-        <ul class="ticket-stack">
+      </div>
+      <div class="skill-card skill-card--highlight">
+        <span class="skill-tag">Core strength</span>
+        <h3>Support &amp; Troubleshooting</h3>
+        <ul>
+          <li>Hardware diagnostics</li>
+          <li>End-user support</li>
+          <li>Ticketing workflows</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Programming</h3>
+        <ul>
           <li>Python</li>
-          <li>Tkinter</li>
-          <li>TTKBootstrap</li>
+          <li>C / C++</li>
+          <li>PHP / Laravel</li>
         </ul>
-        <!-- TODO: link to the project's GitHub repo -->
-        <a class="ticket-link" href="#" target="_blank" rel="noopener">View on GitHub →</a>
-      </article>
-
+      </div>
     </div>
   </section>
 
-  <section id="skills" class="section container">
-    <p class="eyebrow">// system-check</p>
-    <h2>Skills</h2>
-    <div class="diag-panel">
-      <div class="diag-group">
-        <h3>Support &amp; Troubleshooting</h3>
-        <ul class="diag-list">
-          <li><span class="diag-dot"></span>Hardware diagnostics</li>
-          <li><span class="diag-dot"></span>End-user support</li>
-          <li><span class="diag-dot"></span>Ticketing workflows</li>
-        </ul>
-      </div>
-      <div class="diag-group">
-        <h3>Networking &amp; Systems</h3>
-        <ul class="diag-list">
-          <li><span class="diag-dot"></span>Routing &amp; switching (CCNA)</li>
-          <li><span class="diag-dot"></span>Linux fundamentals</li>
-        </ul>
-      </div>
-      <div class="diag-group">
-        <h3>Programming</h3>
-        <ul class="diag-list">
-          <li><span class="diag-dot"></span>Python</li>
-          <li><span class="diag-dot"></span>C / C++</li>
-          <li><span class="diag-dot"></span>PHP / Laravel</li>
-        </ul>
-      </div>
+  <section id="projects" class="section container">
+    <span class="pill pill-outline">// projects</span>
+    <h2 class="section-heading">Recent Work</h2>
+    <div class="project-grid">
+
+      <article class="project-card">
+        <div class="project-thumb project-thumb--a">POS</div>
+        <div class="project-body">
+          <div class="project-head">
+            <span class="project-id">#001</span>
+            <span class="project-status">Resolved</span>
+          </div>
+          <h3>POS System — Samgy Hann 199</h3>
+          <p>A web-based point-of-sale system built for a Korean BBQ restaurant as my capstone project. Handled order flow end-to-end and was load-tested with JMeter for real-world performance.</p>
+          <ul class="stack-list">
+            <li>Laravel 12</li>
+            <li>Livewire 3</li>
+            <li>PHP 8.2</li>
+            <li>Alpine.js</li>
+            <li>Tailwind CSS</li>
+            <li>MySQL</li>
+          </ul>
+          <!-- TODO: link to the project's GitHub repo -->
+          <a class="project-link" href="#" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <div class="project-thumb project-thumb--b">TR</div>
+        <div class="project-body">
+          <div class="project-head">
+            <span class="project-id">#002</span>
+            <span class="project-status">Resolved</span>
+          </div>
+          <h3>Trails</h3>
+          <p>A desktop time-management app built with a 4-person team using Agile/Kanban. Designed to help track tasks and time without getting in the way.</p>
+          <ul class="stack-list">
+            <li>Python</li>
+            <li>Tkinter</li>
+            <li>TTKBootstrap</li>
+          </ul>
+          <!-- TODO: link to the project's GitHub repo -->
+          <a class="project-link" href="#" target="_blank" rel="noopener">View on GitHub →</a>
+        </div>
+      </article>
+
     </div>
   </section>
 
   <section id="contact" class="section contact-section container">
-    <p class="eyebrow">// contact</p>
-    <h2>Open a ticket</h2>
+    <span class="pill pill-outline">// contact</span>
+    <h2 class="section-heading">Open a Ticket</h2>
     <p>Have an opening on your team, or just want to say hi? Send a message — I reply fast.</p>
     <div class="hero-actions">
       <!-- TODO: replace with your real email -->
-      <a class="btn btn-primary" href="mailto:your.email@example.com">Email Me</a>
+      <a class="btn btn-primary" href="mailto:your.email@example.com"><span class="btn-icon">→</span>Email me</a>
       <!-- TODO: replace with your LinkedIn profile URL -->
-      <a class="btn btn-secondary" href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="btn btn-outline" href="https://linkedin.com/in/yourusername" target="_blank" rel="noopener">LinkedIn</a>
       <!-- TODO: replace with your GitHub profile URL -->
-      <a class="btn btn-ghost" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn btn-outline" href="https://github.com/yourusername" target="_blank" rel="noopener">GitHub</a>
     </div>
   </section>
 
