@@ -172,7 +172,7 @@ a:focus-visible, button:focus-visible {
 .hero-photo {
   position: absolute;
   right: 6%;
-  top: 8%;
+  top: clamp(64px, 12vh, 110px); /* fixed-ish offset instead of a % of an auto-height card */
   width: 44%;
   max-width: 320px;
   border-radius: var(--radius-md);
