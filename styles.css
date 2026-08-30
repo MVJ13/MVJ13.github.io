@@ -157,13 +157,14 @@ a:focus-visible, button:focus-visible {
   position: relative;
   z-index: 2;
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-between;
   gap: 24px;
   padding: 28px 32px 0;
 }
 .hero-intro {
-  max-width: 30ch;
+  max-width: 28ch;
   text-align: right;
   font-size: 0.95rem;
   margin: 0;
@@ -171,11 +172,18 @@ a:focus-visible, button:focus-visible {
 }
 .hero-photo {
   position: absolute;
-  right: 6%;
-  top: 8%;
-  width: 44%;
-  max-width: 320px;
+  /* Fixed px offset, not a %, so it clears .hero-intro's actual height
+     regardless of card height — a % here was the bug: it scaled with
+     the card, not with the text it needed to clear. */
+  top: 140px;
+  right: 5%;
+  width: 42%;
+  max-width: 310px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: top center;
   border-radius: var(--radius-md);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
   z-index: 1;
 }
 .hero-card-bottom {
@@ -473,10 +481,10 @@ a:focus-visible, button:focus-visible {
   .nav-menu li:last-child a { border-bottom: none; }
   .nav-toggle { display: flex; }
 
-  .hero-card { min-height: auto; padding-bottom: 200px; }
+  .hero-card { min-height: auto; padding-bottom: 260px; }
   .hero-card-top { flex-direction: column; gap: 16px; }
   .hero-intro { text-align: left; max-width: none; }
-  .hero-photo { position: static; width: 60%; margin: 16px auto 0; }
+  .hero-photo { position: static; width: 60%; max-width: none; margin: 16px auto 0; }
   .hero-card-bottom { padding-top: 20px; }
 
   .skills-grid { grid-template-columns: 1fr; }
