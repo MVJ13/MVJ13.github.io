@@ -25,25 +25,8 @@ I'm a BSIT graduate from Columban College, Inc. in Olongapo City. This site walk
 - CSS3
 - Vanilla JavaScript
 
-## Running Locally
-
-This is a static site — no build step required.
-
-```bash
-git clone https://github.com/MVJ13/MVJ13.github.io.git
-cd MVJ13.github.io
-```
-
-Then open `index.html` directly in your browser, or serve it locally:
-
-```bash
-python3 -m http.server 8000
-```
-
-and visit `http://localhost:8000`.
-
 ## Contact
 
-- Email: [jumalonmark13@gmail.com](mailto:jumalonmark13@gmail.com)
+- Email: [markjumalon2003@gmail.com](mailto:markjumalon2003@gmail.com)
 - LinkedIn: [in/jumalonmark0613](https://www.linkedin.com/in/jumalonmark0613/)
 - GitHub: [@MVJ13](https://github.com/MVJ13)
