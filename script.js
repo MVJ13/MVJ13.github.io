@@ -26,7 +26,8 @@ if ('IntersectionObserver' in window) {
         }
       });
     },
-    { threshold: 0.1 }
+    // threshold 0 + bottom margin: tall sections (e.g. certificates on a phone) can never fail to reveal
+    { threshold: 0, rootMargin: '0px 0px -8% 0px' }
   );
   revealTargets.forEach((target) => observer.observe(target));
 } else {
@@ -37,4 +38,31 @@ if ('IntersectionObserver' in window) {
 const yearEl = document.getElementById('year');
 if (yearEl) {
   yearEl.textContent = new Date().getFullYear();
+}
+// Certificate lightbox
+const certDialog = document.getElementById('cert-dialog');
+if (certDialog && typeof certDialog.showModal === 'function') {
+  const dImg = certDialog.querySelector('.cert-dialog-img');
+  const dTitle = certDialog.querySelector('.cert-dialog-title');
+  const dMeta = certDialog.querySelector('.cert-dialog-meta');
+  const dPdf = certDialog.querySelector('.cert-pdf');
+  document.querySelectorAll('.cert-card').forEach((card) => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      dImg.src = card.getAttribute('href');
+      dImg.alt = card.dataset.title + ' certificate';
+      dTitle.textContent = card.dataset.title;
+      dMeta.textContent = card.dataset.meta;
+      if (card.dataset.pdf) {
+        dPdf.href = card.dataset.pdf;
+        dPdf.hidden = false;
+      } else {
+        dPdf.hidden = true;
+      }
+      certDialog.showModal();
+    });
+  });
+  certDialog.querySelector('.cert-close').addEventListener('click', () => certDialog.close());
+  // Click on the dark backdrop closes it
+  certDialog.addEventListener('click', (e) => { if (e.target === certDialog) certDialog.close(); });
 }
